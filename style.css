@@ -164,3 +164,14 @@ article.book_item  > .action > *:active {
     background-image: url(asset/refresh-line.svg) !important;
     background-size: cover;
 }
+
+footer {
+    margin-top: 90px;
+    height: 50px;
+    background-color: #28C76F;
+    color: #fff;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width: 100%;
+}
