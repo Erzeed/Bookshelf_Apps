@@ -72,49 +72,49 @@ function saveToLocalStorage() {
 function getData() {
     const data = localStorage.getItem(DATA_USER);
     const newData = JSON.parse(data);
-    olahData(newData);
+    seleksiData(newData);
 }
 
-function olahData(newData) {
-    const dataFalse = [];
-    const dataTrue = [];
+function seleksiData(newData) {
+    const dataBelumDIbaca = [];
+    const dataSudahDIbaca = [];
     if (newData != null) {
         bookData = newData;
         newData.forEach(e => {
             if (e.isComplete == false) {
-                dataFalse.push(e);
+                dataBelumDIbaca.push(e);
                 
             }else {
-                dataTrue.push(e);
+                dataSudahDIbaca.push(e);
             }
         });
-        showDataBelumSelesaiDIbaca(dataFalse);
-        showDataSelesaiDIbaca(dataTrue);
+        showDataBelumSelesaiDIbaca(dataBelumDIbaca);
+        showDataSelesaiDIbaca(dataSudahDIbaca);
         searchData(newData);
     }
 }
 
 function searchData(data) {
-    let dataFalse = [];
-    let dataTrue = [];
+    let dataBelumDIbaca = [];
+    let dataSudahDibaca = [];
     btn.addEventListener('submit',(val) => {
         val.preventDefault();
         if(search.value != ''){
             data.forEach(e => {
                 if(e.title.includes(search.value)){
                     if(e.isComplete == false){
-                        dataFalse.push(e);
+                        dataBelumDIbaca.push(e);
                     }else {
-                        dataTrue.push(e);
+                        dataSudahDibaca.push(e);
                     }
                 }
             });
-            showDataBelumSelesaiDIbaca(dataFalse);
-            showDataSelesaiDIbaca(dataTrue);
-            dataFalse = [];
-            dataTrue = [];
+            showDataBelumSelesaiDIbaca(dataBelumDIbaca);
+            showDataSelesaiDIbaca(dataSudahDibaca);
+            dataBelumDIbaca = [];
+            dataSudahDibaca = [];
         }else {
-            olahData(data);
+            seleksiData(data);
         }
     });
     
