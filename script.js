@@ -1,0 +1,159 @@
+const form = document.getElementById('inputBook');
+const val = document.querySelectorAll('.input');
+const checkbox = document.querySelector('.input_inline input');
+const incompleteBookshelfList = document.getElementById('incompleteBookshelfList');
+const completeBookshelfList = document.getElementById('completeBookshelfList');
+const btn = document.getElementById('searchBook');
+const search = document.getElementById('searchBookTitle');
+
+let bookData = [];
+const DATA_USER = "BOOK_DATA";
+getData();
+
+form.addEventListener('submit', (event) =>  {
+    event.preventDefault();
+    formData();
+} );
+
+document.addEventListener('click', (ev) => {
+    if (ev.target.classList == 'green'){
+        bookData.forEach(book => {
+            if(book.id == ev.target.id){
+                book.isComplete = true;
+                saveToLocalStorage();
+            }
+        });
+    }else if (ev.target.classList == 'red'){
+        bookData.forEach((book,i) => {
+            if(book.id == ev.target.id){
+                const bool = confirm(`apakah anda ingin menghapus "${book.title}"`);
+                if(bool == true)
+                bookData.splice([i],1);
+                saveToLocalStorage();
+            }
+        });
+    }else if (ev.target.classList == 'green belumselsesai'){
+        bookData.forEach(book => {
+            if(book.id == ev.target.id){
+                book.isComplete = false;
+                saveToLocalStorage();
+            }
+        });
+    }
+});
+
+
+function formData() {
+    const checked = checkbox.checked;
+    let data = [];
+    val.forEach(e => {
+        const val = e.childNodes[3].value;
+        data.push(val);
+    });
+    data.push(checked);
+    const dataUser = {
+        id: +new Date(),
+        title: data[0],
+        author: data[1],
+        year: data[2],
+        isComplete: data[3],
+    };
+    
+    bookData.push(dataUser);
+    saveToLocalStorage();
+}
+
+function saveToLocalStorage() {
+    localStorage.setItem(DATA_USER,JSON.stringify(bookData));
+    getData();
+}
+
+
+function getData() {
+    const data = localStorage.getItem(DATA_USER);
+    const newData = JSON.parse(data);
+    olahData(newData);
+}
+
+function olahData(newData) {
+    const dataFalse = [];
+    const dataTrue = [];
+    if (newData != null) {
+        bookData = newData;
+        newData.forEach(e => {
+            if (e.isComplete == false) {
+                dataFalse.push(e);
+                
+            }else {
+                dataTrue.push(e);
+            }
+        });
+        showDataBelumSelesaiDIbaca(dataFalse);
+        showDataSelesaiDIbaca(dataTrue);
+        searchData(newData);
+    }
+}
+
+function searchData(data) {
+    let dataFalse = [];
+    let dataTrue = [];
+    btn.addEventListener('submit',(val) => {
+        val.preventDefault();
+        if(search.value != ''){
+            data.forEach(e => {
+                if(e.title.includes(search.value)){
+                    if(e.isComplete == false){
+                        dataFalse.push(e);
+                    }else {
+                        dataTrue.push(e);
+                    }
+                }
+            });
+            showDataBelumSelesaiDIbaca(dataFalse);
+            showDataSelesaiDIbaca(dataTrue);
+            dataFalse = [];
+            dataTrue = [];
+        }else {
+            olahData(data);
+        }
+    });
+    
+}
+
+function showDataBelumSelesaiDIbaca(val) {
+    card = '';
+    val.forEach(e => card += bookShelfBelumDibaca(e));
+    incompleteBookshelfList.innerHTML = card;
+}
+
+function showDataSelesaiDIbaca(val) {
+    card = '';
+    val.forEach(e => card += bookShelfSUdahDibaca(e));
+    completeBookshelfList.innerHTML = card;
+}
+
+
+function bookShelfSUdahDibaca(data) {
+    return `<article class="book_item">
+                <h3>${data.title}</h3>
+                <p>Penulis: ${data.author}</p>
+                <p>Tahun: ${data.year}</p>
+                <div class="action" >
+                <button id="${data.id}" class="green belumselsesai"></button>
+                <button id="${data.id}" class="red"></button>
+                </div>
+            </article>`;
+}
+
+
+function bookShelfBelumDibaca(data) {
+    return `<article class="book_item">
+                <h3>${data.title}</h3>
+                <p>Penulis: ${data.author}</p>
+                <p>Tahun: ${data.year}</p>
+                <div class="action" >
+                    <button id="${data.id}" class="green"></button>
+                    <button  id="${data.id}" class="red"></button>
+                </div>
+            </article>`;
+}

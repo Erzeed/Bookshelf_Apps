@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+* {
+    box-sizing: border-box;
+}
+body {
+    width: 100vw;
+    background-image: url(asset/dustin-tramel-unsplash.jpg);
+    background-size: cover;
+    font-family: 'Noto Sans', sans-serif;
+    margin: 0;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+main {
+    margin: 50px 0;
+    width: 50%;
+    min-height: 70%;
+    padding: 30px;
+    background: rgba( 255, 255, 255, 0.95 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 0.0px );
+    -webkit-backdrop-filter: blur( 0.0px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+section.input_section > h2 {
+    text-align: center;
+}
+
+form#inputBook > .input > input{
+    display: block;
+    width: 100%;
+    height: 35px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+form#inputBook > .input > input:focus {
+    outline-style: none;
+}
+
+form#inputBook > button {
+    width: 100%;
+    height: 30px;
+    border: none;
+    margin: 10px 0;
+    background-color: #28C76F;
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition-duration: .1s;
+}
+
+form#inputBook > button:active,
+section.search_section >  form#searchBook > button:active {
+    box-shadow: none;
+    transform: translate(3px,3px);
+}
+
+form#inputBook > .input_inline {
+    display: flex;
+    align-items: center;
+}
+
+form#inputBook > .input_inline > input[type=checkbox]{
+    width: 13px;
+    height: 13px;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+section.search_section > h2 {
+    text-align: center;
+}
+
+section.search_section >  form#searchBook > input {
+    width: 85%;
+    height: 35px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+section.search_section >  form#searchBook > button {
+    width: 13%;
+    height: 35px;
+    border: none;
+    background-color: #28C76F;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition-duration: .1s;
+}
+
+
+section.book_shelf > .book_list {    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+section.book_shelf > h2 {
+    text-align: center;
+}
+
+article.book_item  {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+    min-width: 150px;
+}
+
+article.book_item  > *{
+    margin: 5px 0;
+}
+article.book_item  > .action{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+article.book_item  > .action > * {
+    border: none;
+    height: 20px;
+    cursor: pointer;
+    transition: .1s ease;
+    margin: 0 5px;
+}
+
+article.book_item  > .action > button:first-child {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-image: url(asset/check-double-line.svg);
+    background-size: cover;
+    
+}
+
+article.book_item  > .action > button:last-child {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-image: url(asset/delete-bin-6-line.svg);
+    background-size: cover;
+}
+
+article.book_item  > .action > *:active {
+    transform: translate(1px,1px);
+}
+.belumselsesai {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-image: url(asset/refresh-line.svg) !important;
+    background-size: cover;
+}
