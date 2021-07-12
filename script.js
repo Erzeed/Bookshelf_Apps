@@ -5,6 +5,7 @@ const incompleteBookshelfList = document.getElementById('incompleteBookshelfList
 const completeBookshelfList = document.getElementById('completeBookshelfList');
 const btn = document.getElementById('searchBook');
 const search = document.getElementById('searchBookTitle');
+const spanText = document.querySelector('#bookSubmit span');
 
 let bookData = [];
 const DATA_USER = "BOOK_DATA";
@@ -14,6 +15,15 @@ form.addEventListener('submit', (event) =>  {
     event.preventDefault();
     formData();
 } );
+
+checkbox.addEventListener('click',() => {
+    const checked = checkbox.checked;
+    if (checked == true) {
+        spanText.innerText = 'selesai dibaca';
+    } else {
+        spanText.innerText = 'Belum selesai dibaca';
+    }
+});
 
 document.addEventListener('click', (ev) => {
     if (ev.target.classList == 'green'){
@@ -119,6 +129,7 @@ function searchData(data) {
     });
     
 }
+
 
 function showDataBelumSelesaiDIbaca(val) {
     card = '';
